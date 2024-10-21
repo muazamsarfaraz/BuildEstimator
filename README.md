@@ -25,15 +25,39 @@ This project is a web-based Construction Cost Calculator that helps users estima
 
 ## Setup and Installation
 
-1. Clone the repository:
+1. Download the Tailwind CSS standalone CLI for Windows from the official Tailwind CSS website:
+   https://github.com/tailwindlabs/tailwindcss/releases/latest
+
+2. Extract the `tailwindcss-windows-x64.exe` file and place it in your project root directory.
+
+3. Create a `tailwind.config.js` file in your project root with the following content:
+   ```js
+   module.exports = {
+     content: ["./**/*.{html,js}"],
+     theme: {
+       extend: {},
+     },
+     plugins: [],
+   }
    ```
-   git clone https://github.com/yourusername/construction-cost-calculator.git
+
+4. Create a CSS file named `input.css` in your project root with the following content:
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
    ```
-2. Navigate to the project directory:
+
+5. Open a command prompt in your project directory and run:
    ```
-   cd construction-cost-calculator
+   tailwindcss-windows-x64.exe -i input.css -o output.css --watch
    ```
-3. Open `index.html` in your web browser to use the calculator.
+
+6. Open `index.html` in your web browser to use the calculator.
+
+## Development
+
+To watch for changes and rebuild the CSS automatically, keep the command from step 5 running in your command prompt.
 
 ## Usage
 
