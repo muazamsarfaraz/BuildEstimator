@@ -56,9 +56,3 @@ Contributions to improve the calculator are welcome. Please follow these steps:
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/construction-cost-calculator](https://github.com/yourusername/construction-cost-calculator)
