@@ -29,13 +29,31 @@
             <div class="mb-6">
                 <label class="block text-gray-700 font-bold mb-2">Extension Type:</label>
                 <div class="flex space-x-4">
-                    <!-- Add your actual image sources -->
                     <label>
                         <input type="radio" name="extension-type" value="single-story" class="hidden" checked>
                         <img src="placeholder-single-story.jpg" alt="Single Story Extension" class="option-image">
                         <p class="text-center">Single Story</p>
                     </label>
-                    <!-- ... (other extension types) -->
+                    <label>
+                        <input type="radio" name="extension-type" value="two-story" class="hidden">
+                        <img src="placeholder-two-story.jpg" alt="Two-Story Extension" class="option-image">
+                        <p class="text-center">Two-Story</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="extension-type" value="wraparound" class="hidden">
+                        <img src="placeholder-wraparound.jpg" alt="Wraparound Extension" class="option-image">
+                        <p class="text-center">Wraparound</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="extension-type" value="loft-conversion" class="hidden">
+                        <img src="placeholder-loft.jpg" alt="Loft Conversion" class="option-image">
+                        <p class="text-center">Loft Conversion</p>
+                    </label>
+                    <label>
+                        <input type="radio" name="extension-type" value="basement-conversion" class="hidden">
+                        <img src="placeholder-basement.webp" alt="Basement Conversion" class="option-image">
+                        <p class="text-center">Basement</p>
+                    </label>
                 </div>
             </div>
             <!-- Extension Size -->
@@ -47,13 +65,16 @@
             <div class="mb-6">
                 <label class="block text-gray-700 font-bold mb-2">Location:</label>
                 <div class="flex space-x-4">
-                    <!-- Add your actual image sources -->
                     <label>
                         <input type="radio" name="location" value="london" class="hidden" checked>
                         <img src="placeholder-london.png" alt="London and South East" class="option-image">
                         <p class="text-center">London & SE</p>
                     </label>
-                    <!-- ... (other locations) -->
+                    <label>
+                        <input type="radio" name="location" value="other" class="hidden">
+                        <img src="placeholder-other.png" alt="Other Regions" class="option-image">
+                        <p class="text-center">Other Regions</p>
+                    </label>
                 </div>
             </div>
             <!-- Materials -->
@@ -98,28 +119,28 @@
                 <div class="grid grid-cols-2 gap-4 ml-4">
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="additional-costs" value="architect-fees" class="form-checkbox">
-                        <span class="ml-2">Architect Fees (<strong>10% of base cost</strong> - £<span id="architect-fee">0.0</span>)</span>
+                        <span class="ml-2">Architect Fees (<strong>10% of base cost</strong> - £<span id="architect-fee">0.0</span>k)</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="additional-costs" value="engineering-fees" class="form-checkbox">
-                        <span class="ml-2">Engineering Fees (<strong>£<span id="engineering-fee">0.0</span></strong>)</span>
+                        <span class="ml-2">Engineering Fees (<strong>£1,500 avg</strong>)</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="additional-costs" value="planning-permission" class="form-checkbox">
-                        <span class="ml-2">Planning Permission (<strong>£<span id="planning-fee">0.0</span></strong>)</span>
+                        <span class="ml-2">Planning Permission (<strong>£206</strong>)</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="additional-costs" value="building-regulations" class="form-checkbox">
-                        <span class="ml-2">Building Regulations (<strong>£<span id="building-fee">0.0</span></strong>)</span>
+                        <span class="ml-2">Building Regulations (<strong>£725 avg</strong>)</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="additional-costs" value="vat" class="form-checkbox">
-                        <span class="ml-2">VAT (<strong>20% of subtotal</strong> - £<span id="vat-amount">0.0</span>)</span>
+                        <span class="ml-2">VAT (<strong>20% of subtotal</strong>)</span>
                     </label>
                 </div>
             </div>
             <!-- Total Estimated Cost -->
-            <div class="mt-6 text-center border-2 border-gray-300 p-4 rounded-3xl">
+            <div class="mt-6 text-center border-2 border-gray-300 p-4">
                 <h2 class="text-2xl font-bold">Total Estimated Cost: £<span id="estimated-cost">0</span></h2>
             </div>
         </form>
@@ -132,6 +153,7 @@
         const baseCostElement = document.getElementById('base-cost');
         const estimatedCostElement = document.getElementById('estimated-cost');
 
+        // Function to update selected images
         function updateSelectedImages() {
             // Extension Type Images
             document.querySelectorAll('input[name="extension-type"]').forEach((input) => {
@@ -169,7 +191,26 @@
                     if (materials === 'premium') costPerSqM += 300;
                     if (complexity === 'complex') costPerSqM += 500;
                     break;
-                // ... (other cases)
+                case 'two-story':
+                    costPerSqM = 1500;
+                    if (materials === 'premium') costPerSqM += 300;
+                    if (complexity === 'complex') costPerSqM += 500;
+                    break;
+                case 'wraparound':
+                    costPerSqM = 2000;
+                    if (materials === 'premium') costPerSqM += 500;
+                    if (complexity === 'complex') costPerSqM += 700;
+                    break;
+                case 'loft-conversion':
+                    costPerSqM = 1500;
+                    if (materials === 'premium') costPerSqM += 300;
+                    if (complexity === 'complex') costPerSqM += 500;
+                    break;
+                case 'basement-conversion':
+                    costPerSqM = 2500;
+                    if (materials === 'premium') costPerSqM += 500;
+                    if (complexity === 'complex') costPerSqM += 700;
+                    break;
                 default:
                     costPerSqM = 0;
             }
@@ -187,51 +228,41 @@
             // Additional Costs
             let additionalCostTotal = 0;
 
-            // Initialize amounts
-            let architectFee = 0;
-            let engineeringFee = 0;
-            let planningFee = 0;
-            let buildingFee = 0;
-            let vatAmount = 0;
-
             if (additionalCosts.includes('architect-fees')) {
-                architectFee = baseCost * 0.10;
-                additionalCostTotal += architectFee;
+                const architectFee = (baseCost * 0.10) / 1000; // Convert to thousands
+                additionalCostTotal += architectFee * 1000; // Add the full amount to the total
+                document.getElementById('architect-fee').textContent = architectFee.toFixed(1); // Display with one decimal place
+            } else {
+                document.getElementById('architect-fee').textContent = '0.0';
             }
 
             if (additionalCosts.includes('engineering-fees')) {
-                engineeringFee = 1500;
-                additionalCostTotal += engineeringFee;
+                // Engineering fees: £500 to £2500
+                additionalCostTotal += 1500; // average
             }
-
             if (additionalCosts.includes('planning-permission')) {
-                planningFee = 206;
-                additionalCostTotal += planningFee;
+                // Planning permission: £206
+                additionalCostTotal += 206;
             }
-
             if (additionalCosts.includes('building-regulations')) {
-                buildingFee = 725;
-                additionalCostTotal += buildingFee;
+                // Building regulations: £600 to £850
+                additionalCostTotal += 725; // average
             }
 
-            let subtotal = baseCost + architectFee + engineeringFee + planningFee + buildingFee;
+            let subtotal = baseCost + additionalCostTotal;
 
             if (additionalCosts.includes('vat')) {
-                vatAmount = subtotal * 0.20;
-                additionalCostTotal += vatAmount;
+                // VAT: 20% of subtotal
+                const vat = subtotal * 0.20;
+                additionalCostTotal += vat;
             }
 
-            const totalCost = baseCost + architectFee + engineeringFee + planningFee + buildingFee + vatAmount;
+            const totalCost = baseCost + additionalCostTotal;
 
-            // Update amounts in the labels
-            document.getElementById('architect-fee').textContent = architectFee > 0 ? architectFee.toLocaleString('en-GB', { maximumFractionDigits: 0 }) : '0.0';
-            document.getElementById('engineering-fee').textContent = engineeringFee > 0 ? engineeringFee.toLocaleString('en-GB', { maximumFractionDigits: 0 }) : '0.0';
-            document.getElementById('planning-fee').textContent = planningFee > 0 ? planningFee.toLocaleString('en-GB', { maximumFractionDigits: 0 }) : '0.0';
-            document.getElementById('building-fee').textContent = buildingFee > 0 ? buildingFee.toLocaleString('en-GB', { maximumFractionDigits: 0 }) : '0.0';
-            document.getElementById('vat-amount').textContent = vatAmount > 0 ? vatAmount.toLocaleString('en-GB', { maximumFractionDigits: 0 }) : '0.0';
+            // Format the total cost
+            const formattedTotalCost = totalCost.toLocaleString('en-GB', { maximumFractionDigits: 0 });
 
-            // Display total cost
-            estimatedCostElement.textContent = totalCost.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+            estimatedCostElement.textContent = formattedTotalCost;
         }
 
         // Update size value display
